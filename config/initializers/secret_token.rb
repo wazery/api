@@ -16,4 +16,4 @@
 # Using secret_token for rails3 compatibility. Change to secret_key_base
 # to avoid deprecation warning.
 # Can be safely removed in a rails3 api-only application.
-HacktodayApi::Application.config.secret_token = '0322c143230f54355c97ec9a14fa07859c831694d06ad493a91abbfc2ad380e89779410f9c9703b2cb8ec2189091e6db4643211c93908e8e374f35b6a2f6aae3'
+Api::Application.config.secret_token = 'd70d832e26936d1861ca9ace50a286b89edd0f072cfffb656684e9c3d638b736a617ce41457cf0e41d6a5bba004593d9395e1495e28aba695f34f898957462fb'
