@@ -1,8 +1,6 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-# load 'config/recipes/monit'
-
 set :application, 'hacktoday-api'
 set :repo_url, 'git@github.com:wazery/hacktoday-api.git'
 
@@ -22,7 +20,7 @@ set :format, :pretty
 # set :log_level, :debug
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
 # set :linked_files, fetch(:linked_files, []).push('config/mongoid.yml', 'config/secrets.yml')
@@ -44,7 +42,7 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 
 # what specs should be run before deployment is allowed to
 # continue, see lib/capistrano/tasks/run_tests.cap
-# set :tests, []
+# set :tests, ["spec"]
 
 # which config files should be copied by deploy:setup_config
 # see documentation in lib/capistrano/tasks/setup_config.cap
@@ -76,11 +74,11 @@ set(:symlinks, [
   },
   {
     source: "unicorn_init.sh",
-    link: "/etc/init.d/unicorn_{{full_app_name}}"
+    link: "/etc/init.d/unicorn_dd{{full_app_name}}"
   },
   {
     source: "log_rotation",
-   link: "/etc/logrotate.d/{{full_app_name}}"
+    link: "/etc/logrotate.d/{{full_app_name}}"
   },
   {
     source: "monit",

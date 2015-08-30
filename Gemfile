@@ -26,6 +26,7 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
+  gem 'sshkit-sudo'
 end
 
 # To use debugger

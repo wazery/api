@@ -1,10 +1,10 @@
 #!/bin/sh
 set -e
 
-APP_ROOT=<%= current_path %>
-PID=$APP_ROOT/tmp/pids/sidekiq.pid
-CMD="cd $APP_ROOT; RAILS_ENV=<%= "#{fetch(:rails_env)}" %> nohup bundle exec sidekiq -e <%= "#{fetch(:rails_env)}" %> -C $APP_ROOT/config/sidekiq.yml -i 0 -P $PID >> $APP_ROOT/log/sidekiq.log 2>&1 &"
-STOP_CMD="cd $APP_ROOT; RAILS_ENV=<%= "#{fetch(:rails_env)}" %> bundle exec sidekiqctl stop $APP_ROOT/tmp/pids/sidekiq.pid 10"
+APP_ROOT=/home/api-deployer/hacktoday-api
+PID=$APP_ROOT/shared/pids/sidekiq.pid
+CMD="cd $APP_ROOT; RAILS_ENV=<%= "#{fetch(:rails_env)}" %> nohup bundle exec sidekiq -e <%= "#{fetch(:rails_env)}" %> -C $APP_ROOT/shared/config/sidekiq.yml -i 0 -P $PID >> $APP_ROOT/shared/log/sidekiq.log 2>&1 &"
+STOP_CMD="cd $APP_ROOT; RAILS_ENV=<%= "#{fetch(:rails_env)}" %> bundle exec sidekiqctl stop $APP_ROOT/shared/pids/sidekiq.pid 10"
 AS_USER=<%= fetch(:deploy_user) %>
 
 run () {
@@ -39,7 +39,7 @@ case "$1" in
       echo "stopping...."
       run "$STOP_CMD"
     fi
-    run "$CMD"    
+    run "$CMD"
     ;;
   *)
     echo >&2 "Usage: $0 <start|stop|restart>"
