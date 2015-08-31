@@ -5,8 +5,8 @@ check process unicorn_<%= application %>
   start program = "/etc/init.d/unicorn_<%= application %> start"
   stop program = "/etc/init.d/unicorn_<%= application %> stop"
   if mem is greater than 300.0 MB for 1 cycles then restart       # eating up memory?
-  if cpu is greater than 50% for 2 cycles then alert                  # send an email to admin
-  if cpu is greater than 80% for 30 cycles then restart                # hung process?
+  if cpu is greater than 50% for 2 cycles then alert              # send an email to admin
+  if cpu is greater than 80% for 30 cycles then restart           # hung process?
   group unicorn
 
 <% (0..(fetch(:unicorn_worker_count) -1)).each do |worker| %>

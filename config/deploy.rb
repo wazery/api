@@ -94,9 +94,12 @@ set(:symlinks, [
 namespace :deploy do
   # make sure we're deploying what we think we're deploying
   before :deploy, 'deploy:check_revision'
+  before :deploy, 'deploy:setup_config' # Temporarily setup config each time
+
   # only allow a deploy with passing tests to deployed
   # TODO: Enable this
   # before :deploy, "deploy:run_tests"
+
   after :finishing, 'deploy:cleanup'
 
   # remove the default nginx configuration as it will tend

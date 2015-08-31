@@ -22,10 +22,10 @@ development:
         #   mode: :secondary_preferred
 
         # The name of the user for authentication.
-        user: 'user'
+        # user: ''
 
         # The password of the user for authentication.
-        password: 'password'
+        # password: ''
 
         # The user's database roles.
         # roles:
@@ -123,6 +123,19 @@ development:
 
     # Ensure all times are UTC in the app side. (default: false)
     # use_utc: false
+production:
+  # Configure available database sessions. (required)
+  sessions:
+    # Defines the default session. (required)
+    default:
+      # Defines the name of the default database that Mongoid can connect to.
+      # (required).
+      database: hacktoday-api_production
+      # Provides the hosts the default session can connect to. Must be an array
+      # of host:port pairs. (required)
+      hosts:
+        - localhost:28017
+      options:
 test:
   clients:
     default:

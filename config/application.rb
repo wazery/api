@@ -2,14 +2,14 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails'
 # Pick the frameworks you want:
-require 'active_model/railtie'
-require 'active_job/railtie'
-# require "active_record/railtie"
 require 'action_controller/railtie'
-require 'action_mailer/railtie'
-require 'action_view/railtie'
-require 'sprockets/railtie'
-require 'rails/test_unit/railtie'
+# require 'active_model/railtie'
+# require 'active_job/railtie'
+# require "active_record/railtie"
+# require 'action_mailer/railtie'
+# require 'rails/test_unit/railtie'
+
+# require 'pp'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -20,6 +20,15 @@ module Api
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    # Mongoid.logger.level = Logger::DEBUG
+    # Moped.logger.level = Logger::DEBUG
+
+    # This's to fix awesome_print with mongoid
+    # console do
+    #    ::Moped::BSON = ::BSON
+    #    AwesomePrint.pry!
+    # end
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

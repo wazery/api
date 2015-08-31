@@ -17,7 +17,7 @@ TIMEOUT=${TIMEOUT-60}
 APP_ROOT=/home/api-deployer/hacktoday-api/current
 PID_DIR=/home/api-deployer/hacktoday-api/shared/tmp/pids
 PID=$PID_DIR/unicorn.pid
-CMD="cd $APP_ROOT; bundle exec unicorn -D -c <%= "#{shared_path}/config/unicorn.rb" %> -E <%= fetch(:rails_env) %>"
+CMD="cd $APP_ROOT; bundle exec unicorn_rails -D -c <%= "#{shared_path}/config/unicorn.rb" %> -E <%= fetch(:rails_env) %>"
 AS_USER=<%= fetch(:deploy_user) %>
 set -u
 
