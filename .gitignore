@@ -46,3 +46,4 @@ build/
 /tmp
 
 config/secrets.yml
+config/mongoid.yml

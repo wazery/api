@@ -10,8 +10,8 @@
 set :stage, :production
 set :branch, 'master'
 
-set :server_name, 'api.hacktoday.io'
-# set :server_name, '192.81.222.40'
+# set :server_name, 'api.hacktoday.io'
+set :server_name, '192.81.222.40'
 
 # used in case we're deploying multiple versions of the same
 # app side by side. Also provides quick sanity checks when looking
