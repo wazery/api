@@ -21,7 +21,9 @@ namespace :monit do
   %w[start stop restart syntax reload].each do |command|
     desc "Run Monit #{command} script"
     task command do
-      run "#{sudo} service monit #{command}"
+      on roles(:app) do
+        sudo "service monit #{command}"
+      end
     end
   end
 end

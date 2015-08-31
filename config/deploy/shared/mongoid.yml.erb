@@ -9,7 +9,9 @@
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - localhost
+        #- localhost
+        #- localhost:27017
+        - 192.81.222.40:27017
       options:
         # Change whether the session persists in safe mode by default.
         # (default: false)
@@ -34,7 +36,7 @@
     # allow_dynamic_fields: true
 
     # Enable the identity map, needed for eager loading. (default: false)
-     identity_map_enabled: true
+    # identity_map_enabled: true
 
     # Includes the root model name in json serialization. (default: false)
     # include_root_in_json: false
