@@ -6,7 +6,8 @@ gem 'rails-api'
 
 # gem 'activeresource'
 
-gem 'mongoid', '~> 5.0.0.beta'
+# Data related gems
+gem 'mongoid'
 gem 'bson_ext'
 
 # To use ActiveModel has_secure_password
@@ -18,15 +19,21 @@ gem 'bson_ext'
 # Use unicorn as the app server
 gem 'unicorn', group: :production
 
-# Deploy with Capistrano
 group :development do
   gem 'spring'
+  # Deploy with Capistrano
   gem 'capistrano',         require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
   gem 'sshkit-sudo'
+  gem 'awesome_print', require: 'ap'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'database_cleaner'
 end
 
 # To use debugger
