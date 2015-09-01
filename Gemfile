@@ -10,6 +10,8 @@ gem 'rails-api'
 gem 'mongoid'
 gem 'bson_ext'
 
+gem 'mongoid'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
