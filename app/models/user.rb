@@ -22,7 +22,7 @@ class User
   field :name,               type: String, default: ''
   field :github_token,       type: String, default: ''
 
-  index({ email: 1 },        unique: true, background: true)
+  index({email: 1},        unique: true, background: true)
   # index({ uid: 1 },          unique: true, background: true)
   index({ github_token: 1 }, unique: true, background: true)
 
@@ -85,15 +85,14 @@ class User
   end
 
   def sign_in_formatted
-    formatted_user = {}
-    formatted_user[:id] = id
-    formatted_user[:token] = github_token
-    formatted_user[:email] = email
-    formatted_user[:name] = name
-    formatted_user[:sign_in_count] = sign_in_count
-    formatted_user[:created_at] = created_at
-
-    formatted_user
+    {
+      id: id,
+      token: github_token,
+      email: email,
+      name: name,
+      sign_in_count: sign_in_count,
+      created_at: created_at
+    }
   end
 
   private
