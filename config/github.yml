@@ -1,0 +1,14 @@
+production:
+  client_id: 3386d803e6ebaba003dc
+  client_secret: 030704ccdf4ba0691132ac3f5d82f728414230f3
+
+staging:
+  client_id: 3386d803e6ebaba003dc
+  client_secret: 030704ccdf4ba0691132ac3f5d82f728414230f3
+
+development: &development
+  client_id: 3386d803e6ebaba003dc
+  client_secret: 030704ccdf4ba0691132ac3f5d82f728414230f3
+
+test:
+  <<: *development
