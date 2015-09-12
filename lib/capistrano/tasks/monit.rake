@@ -18,7 +18,7 @@ namespace :monit do
   # task(:nginx, roles: :web) { monit_config "nginx" }
   # task(:unicorn, roles: :app) { monit_config "unicorn" }
 
-  %w[start stop restart syntax reload].each do |command|
+  %w(start stop restart syntax reload).each do |command|
     desc "Run Monit #{command} script"
     task command do
       on roles(:app) do
