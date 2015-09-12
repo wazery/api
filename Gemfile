@@ -7,10 +7,13 @@ gem 'rails-api'
 # gem 'activeresource'
 
 # Data related gems
-gem 'mongoid'
+gem 'mongoid', '~> 4.0.2'
 gem 'bson_ext'
 
-gem 'mongoid'
+# Auth related gems
+gem 'devise',   '~> 3.5.2'
+gem 'omniauth', '~> 1.2.2'
+gem 'octokit',  '~> 4.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
