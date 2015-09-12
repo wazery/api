@@ -21,6 +21,8 @@ gem 'mongoid'
 # Use unicorn as the app server
 gem 'unicorn', group: :production
 
+gem 'rubocop', require: false
+
 group :development do
   gem 'spring'
   # Deploy with Capistrano
