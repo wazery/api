@@ -3,7 +3,6 @@ namespace :deploy do
     on roles(:app) do
       # make the config dir
       execute :mkdir, "-p #{shared_path}/config"
-      full_app_name = fetch(:full_app_name)
 
       # config files to be uploaded to shared/config, see the
       # definition of smart_template for details of operation.

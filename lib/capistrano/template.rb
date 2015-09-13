@@ -10,10 +10,10 @@
 # ones to be over-ridden
 # if the target file name is the same as the source then
 # the second parameter can be left out
-def smart_template(from, to=nil)
+def smart_template(from, to = nil)
   to ||= from
   full_to_path = "#{shared_path}/config/#{to}"
-  if from_erb_path = template_file(from)
+  if from_erb_path == template_file(from)
     from_erb = StringIO.new(ERB.new(File.read(from_erb_path)).result(binding))
     upload! from_erb, full_to_path
     info "copying: #{from_erb} to: #{full_to_path}"
@@ -28,5 +28,5 @@ def template_file(name)
   elsif File.exist?((file = "config/deploy/shared/#{name}.erb"))
     return file
   end
-  return nil
+  nil
 end

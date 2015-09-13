@@ -21,9 +21,9 @@ stdout_path "#{shared_dir}/log/unicorn.stdout.log"
 pid "#{shared_dir}/tmp/pids/unicorn.pid"
 
 before_fork do |server, worker|
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+  defined?(ActiveRecord::Base) && ActiveRecord::Base.connection.disconnect!
   old_pid = "#{server.config[:pid]}.oldbin"
-  if File.exists?(old_pid) && server.pid != old_pid
+  if File.exist?(old_pid) && server.pid != old_pid
     begin
       sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
       Process.kill(sig, File.read(old_pid).to_i)
@@ -33,10 +33,6 @@ before_fork do |server, worker|
   end
 end
 
-after_fork do |server, worker|
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
-end
+after_fork { defined?(ActiveRecord::Base) && ActiveRecord::Base.establish_connection }
 
-before_exec do |server|
-  ENV['BUNDLE_GEMFILE'] = "#{app_dir}/Gemfile"
-end
+before_exec { ENV['BUNDLE_GEMFILE'] = "#{app_dir}/Gemfile" }
