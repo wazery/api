@@ -35,10 +35,10 @@ set :pty, true
 set :keep_releases, 2
 
 # files we want symlinking to specific entries in shared
-set :linked_files, %w{config/mongoid.yml}
+set :linked_files, %w(config/mongoid.yml)
 
 # dirs we want symlinking to shared
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
 
 # what specs should be run before deployment is allowed to
 # continue, see lib/capistrano/tasks/run_tests.cap
@@ -69,20 +69,20 @@ set(:executable_config_files, %w(
 # tag and then add it at run time.
 set(:symlinks, [
   {
-    source: "nginx.conf",
-    link: "/etc/nginx/sites-enabled/{{full_app_name}}"
+    source: 'nginx.conf',
+    link: '/etc/nginx/sites-enabled/{{full_app_name}}'
   },
   {
-    source: "unicorn_init.sh",
-    link: "/etc/init.d/unicorn_{{full_app_name}}"
+    source: 'unicorn_init.sh',
+    link: '/etc/init.d/unicorn_{{full_app_name}}'
   },
   {
-    source: "log_rotation",
-    link: "/etc/logrotate.d/{{full_app_name}}"
+    source: 'log_rotation',
+    link: '/etc/logrotate.d/{{full_app_name}}'
   },
   {
-    source: "monit",
-    link: "/etc/monit/conf.d/{{full_app_name}}.conf"
+    source: 'monit',
+    link: '/etc/monit/conf.d/{{full_app_name}}.conf'
   }
 ])
 
