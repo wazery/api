@@ -83,7 +83,7 @@ class Hacker
 
     name = hacker.name.blank? ? email.partition('@').first : hacker.name
 
-    { email: emails, name: name, github_token: access_token }
+    { email: email, name: name, github_token: access_token }
   end
 
   def sign_in_formatted
