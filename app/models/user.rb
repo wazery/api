@@ -1,3 +1,6 @@
+# User User model, that saves the Github user data to a Mongoid doc.
+# @author Islam Wazery <wazery@ubuntu.com>
+# @author Mohamed Yossry <mohamedyosry3000@gmail.com>
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -22,9 +25,9 @@ class User
   field :name,               type: String, default: ''
   field :github_token,       type: String, default: ''
 
-  index({email: 1}, unique: true, background: true)
+  index({ email: 1 }, unique: true, background: true)
   # index({ uid: 1 },          unique: true, background: true)
-  index({github_token: 1}, unique: true, background: true)
+  index({ github_token: 1 }, unique: true, background: true)
 
   # Validations
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -36,7 +39,6 @@ class User
   cattr_writer :octokit
   cattr_writer :octokit_client
 
-  # Callbacks
   def self.octokit
     @@octokit || Octokit
   end
@@ -81,7 +83,7 @@ class User
 
     name = user.name.blank? ? email.partition('@').first : user.name
 
-    {email: emails, name: name, github_token: access_token}
+    { email: emails, name: name, github_token: access_token }
   end
 
   def sign_in_formatted

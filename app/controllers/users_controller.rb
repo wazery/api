@@ -19,8 +19,8 @@ class UsersController < ApplicationController
 
     fail 'Authentication failed' unless user
 
-    render json: {user: user.sign_in_formatted}
+    render json: { user: user.sign_in_formatted }
   rescue => e
-    return render json: {message: e.message}, status: 401
+    return render json: { message: e.message }, status: 401
   end
 end

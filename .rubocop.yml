@@ -31,7 +31,7 @@ Style/ClassVars:
   Enabled: true
 
 Style/Documentation:
-  Enabled: true
+  Enabled: false
 
 Style/RescueModifier:
   Enabled: true

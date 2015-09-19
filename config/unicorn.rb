@@ -29,6 +29,7 @@ before_fork do |server, worker|
       Process.kill(sig, File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
       # someone else did our job for us
+      p 'There was a problem happend during killing the workers'
     end
   end
 end
