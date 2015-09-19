@@ -1,7 +1,7 @@
-# User User model, that saves the Github user data to a Mongoid doc.
+# User User model, that saves the Github hacker data to a Mongoid doc.
 # @author Islam Wazery <wazery@ubuntu.com>
 # @author Mohamed Yossry <mohamedyosry3000@gmail.com>
-class User
+class Hacker
   include Mongoid::Document
   include Mongoid::Timestamps
   devise :registerable, :rememberable, :trackable,
@@ -52,19 +52,19 @@ class User
   end
 
   def self.sign_up(data)
-    User.create(data)
+    Hacker.create(data)
     # TODO: Implement Intercom Notifier
-    # IntercomNotifier.perform_in(1.hours, :signed_up_an_hour_ago, user.id)
+    # IntercomNotifier.perform_in(1.hours, :signed_up_an_hour_ago, hacker.id)
   end
 
   def self.find_or_create_by_github_oauth_code(code)
     access_token = fetch_github_access_token(code)
 
-    user = find_by_github_access_token(access_token)
-    return user if user
+    hacker = find_by_github_access_token(access_token)
+    return hacker if hacker
 
-    user = sign_up(info_by_github_access_token(access_token))
-    user
+    hacker = sign_up(info_by_github_access_token(access_token))
+    hacker
   end
 
   def self.find_by_github_access_token(access_token)
@@ -73,15 +73,15 @@ class User
 
   def self.info_by_github_access_token(access_token)
     client = github_client(access_token)
-    user   = client.user
+    hacker   = client.hacker
 
     # cached_emails = REDIS.get(github_emails_cache_key(access_token))
     # emails = JSON.parse(cached_emails) if cached_emails
     email = client.emails.first[:email] # unless cached_emails
     # TODO: Check why reject those emails?
-    # emails = emails.reject { |email| email =~ /@users\.noreply\.github\.com$/ }
+    # emails = emails.reject { |email| email =~ /@hackers\.noreply\.github\.com$/ }
 
-    name = user.name.blank? ? email.partition('@').first : user.name
+    name = hacker.name.blank? ? email.partition('@').first : hacker.name
 
     { email: emails, name: name, github_token: access_token }
   end
