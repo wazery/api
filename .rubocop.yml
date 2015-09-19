@@ -10,48 +10,46 @@ AllCops:
     - 'bin/**/*'
     - 'features/**/*.rb'
     - 'script/**/*.rb'
-    - 'spec/spec_helper.rb'
-    - 'spec/rails_helper.rb'
     - 'vendor/**/*'
 
 Style/SelfAssignment: # good to be enabled
-  Enabled: false
+  Enabled: true
 
 Style/NestedTernaryOperator: # good to be enabled
-  Enabled: false
+  Enabled: true
 
 Style/PredicateName: # good to be enabled
-  Enabled: false
+  Enabled: true
 
 Style/AccessorMethodName: # good to be enabled
-  Enabled: false
+  Enabled: true
 
 Style/DoubleNegation:
-  Enabled: false
+  Enabled: true
 
 Style/ClassVars:
-  Enabled: false
+  Enabled: true
 
 Style/Documentation:
-  Enabled: false
+  Enabled: true
 
 Style/RescueModifier:
-  Enabled: false
+  Enabled: true
 
 Style/ClassAndModuleChildren:
-  Enabled: false
+  Enabled: true
 
 Style/SpaceInsideHashLiteralBraces:
-  Enabled: false
+  Enabled: true
 
 Style/TrailingComma:
   Enabled: false
 
 Metrics/BlockNesting: # good to be enabled
-  Enabled: false
+  Enabled: true
 
 Metrics/ClassLength:
-  Enabled: false
+  Enabled: true
 
 Metrics/AbcSize:
   Enabled: false
@@ -60,13 +58,13 @@ Metrics/MethodLength:
   Enabled: false
 
 Metrics/PerceivedComplexity:
-  Enabled: false
+  Enabled: trye
 
 Metrics/CyclomaticComplexity:
-  Enabled: false
+  Enabled: trye
 
 Metrics/LineLength:
   Enabled: false
 
 Lint/HandleExceptions:
-  Enabled: false
+  Enabled: true
