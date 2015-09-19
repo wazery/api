@@ -26,6 +26,11 @@ gem 'unicorn', group: :production
 
 gem 'rubocop', require: false
 
+# Documentation
+gem 'yard'
+
+gem 'colorize'
+
 group :development do
   gem 'spring'
   # Deploy with Capistrano
@@ -35,15 +40,16 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
   gem 'airbrush'
-  # For sudo prompts while deploying
-  gem 'sshkit-sudo'
+  gem 'sshkit-sudo' # For sudo prompts while deploying
   gem 'awesome_print', require: 'ap'
 end
 
 group :test do
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'simplecov', '~> 0.9.0'
   gem 'rspec-rails'
   gem 'mongoid-rspec', '~> 2.1.0'
-  gem 'database_cleaner', '~> 1.4.1'
 end
 
 # To use debugger
