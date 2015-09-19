@@ -1,14 +1,14 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'hacktoday-api'
-set :repo_url, 'git@github.com:wazery/hacktoday-api.git'
+set :application, 'hackhub-api'
+set :repo_url, 'git@github.com:wazery/hh-api.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/api-deployer/hacktoday-api/'
+set :deploy_to, '/home/deployer/hackhub-api/'
 
 # Default value for :scm is :git
 set :scm, :git

@@ -1,10 +1,10 @@
-root = "/home/api-deployer/hacktoday-api"
-working_directory("/home/api-deployer/hacktoday-api/current")
+root = "/home/deployer/hackhub-api"
+working_directory("/home/deployer/hackhub-api/current")
 pid "#{root}/shared/tmp/pids/unicorn.pid"
 stderr_path "#{root}/shared/log/unicorn.stderr.log"
 stdout_path "#{root}/shared/log/unicorn.stdout.log"
 
-listen "/home/api-deployer/hacktoday-api/shared/tmp/sockets/unicorn.sock"
+listen "/home/deployer/hackhub-api/shared/tmp/sockets/unicorn.sock"
 worker_processes <%= fetch(:unicorn_worker_count) %>
 timeout 40
 preload_app true

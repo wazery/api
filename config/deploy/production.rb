@@ -10,8 +10,8 @@
 set :stage, :production
 set :branch, 'master'
 
-# set :server_name, 'api.hacktoday.io'
-set :server_name, '192.81.222.40'
+set :server_name, 'api.hackhub.io'
+# set :server_name, '107.170.53.125'
 
 # used in case we're deploying multiple versions of the same
 # app side by side. Also provides quick sanity checks when looking
@@ -19,9 +19,9 @@ set :server_name, '192.81.222.40'
 set :full_app_name, "#{fetch(:application)}"
 # set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
-server '192.81.222.40', user: 'api-deployer', roles: %w(web app db), primary: true
+server '107.170.53.125', user: 'deployer', roles: %w(web app db), primary: true
 
-set :deploy_user, 'api-deployer'
+set :deploy_user, 'deployer'
 
 set :deploy_to, "/home/#{fetch(:deploy_user)}/#{fetch(:full_app_name)}"
 
