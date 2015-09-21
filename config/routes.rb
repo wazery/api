@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+
+  get '~/ping', to: 'misc#ping'
+  root to: 'misc#ping'
+
   as :users do
     post '/users/oauth' => 'users#oauth'
   end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
