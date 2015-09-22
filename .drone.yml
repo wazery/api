@@ -1,0 +1,12 @@
+image: ruby2.2.2
+script:
+  - cp config/database.drone.yml config/database.yml
+  - sudo start mongodb
+  - sleep 10
+  - bundle install
+  - bundle exec rake db:schema:load
+  - bundle exec rspec spec
+notify:
+  email:
+    recipients:
+      - wazery@ubuntu.com
