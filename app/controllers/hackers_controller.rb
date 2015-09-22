@@ -1,9 +1,9 @@
-class UsersController < ApplicationController
+class HackersController < ApplicationController
   ################# Documentation ######################################################################################
-  # api :POST, '/developers/oauth', 'Authenticate user using an OAuth provider'
+  # api :POST, '/hackers/oauth', 'Authenticate hacker using an OAuth provider'
   # description <<-EOS
   #   returns:{
-  #     user: {
+  #     hacker: {
   #       id:
   #       token:
   #       email:
@@ -15,11 +15,11 @@ class UsersController < ApplicationController
   # error code: 401, desc: 'Authentication failed'
   ################# /Documentation #####################################################################################
   def oauth
-    user = User.find_or_create_by_github_oauth_code(params[:code])
+    hacker = Hacker.find_or_create_by_github_oauth_code(params[:code])
 
-    fail 'Authentication failed' unless user
+    fail 'Authentication failed' unless hacker
 
-    render json: { user: user.sign_in_formatted }
+    render json: { hacker: hacker.sign_in_formatted }
   rescue => e
     return render json: { message: e.message }, status: 401
   end
