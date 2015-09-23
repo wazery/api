@@ -1,4 +1,4 @@
-image: ruby2.2.2
+image: ruby:2.2.3
 script:
   - mkdir -p /tmp/bundle
   - sudo chown -R ubuntu:ubuntu /tmp/bundle
