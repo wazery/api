@@ -32,6 +32,9 @@ gem 'apipie-rails'
 
 gem 'colorize'
 
+# Background workers
+gem 'sidekiq'
+
 group :development do
   gem 'spring'
   # Deploy with Capistrano
@@ -51,6 +54,7 @@ group :test do
   gem 'simplecov', '~> 0.9.0', require: false
   gem 'rspec-rails'
   gem 'mongoid-rspec', '~> 2.1.0'
+  gem 'rspec-sidekiq'
 end
 
 # To use debugger
