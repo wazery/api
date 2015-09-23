@@ -3,6 +3,8 @@ script:
   - mkdir -p /tmp/bundle
   - bundle install --quiet --path /tmp/bundle
   - cp config/drone.database.yml config/database.yml
+  - sudo start mongodb
+  - sleep 10
   - bundle exec rspec spec
 cache:
   - /tmp/bundle
