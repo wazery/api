@@ -1,5 +1,5 @@
 <%= fetch(:rails_env) %>:
-  clients:
+  sessions:
     default:
       database: <%= "#{fetch(:application)}_#{fetch(:rails_env)}" %>
       hosts:
@@ -7,7 +7,7 @@
       options:
   options:
 test:
-  clients:
+  sessions:
     default:
       database: api_test
       hosts:
