@@ -8,7 +8,15 @@ gem 'rails-api'
 
 # Data related gems
 gem 'mongoid', '~> 4.0.2'
-gem 'bson_ext'
+gem 'redis'
+gem 'hiredis'
+
+# HTTP Requests
+gem 'faraday', '~> 0.9.0'
+
+# Authentication
+gem 'micro_token'
+gem 'jwt'
 
 # Auth related gems
 gem 'devise',   '~> 3.5.2'
@@ -34,6 +42,7 @@ gem 'colorize'
 
 # Background workers
 gem 'sidekiq'
+gem 'sinatra' # For the Sidekiq panel
 
 group :development do
   gem 'spring'
@@ -45,7 +54,8 @@ group :development do
   gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
   gem 'sshkit-sudo' # For sudo prompts while deploying
   gem 'awesome_print', require: 'ap'
-  # gem 'airbrussh', require: false
+  gem 'airbrussh', require: false
+  gem 'byebug'
 end
 
 group :test do
