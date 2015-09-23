@@ -1,11 +1,22 @@
 image: ruby2.2.2
 script:
-  - cp config/database.drone.yml config/database.yml
-  - sudo start mongodb
-  - sleep 10
-  - bundle install
+  - mkdir -p /tmp/bundle
+  - sudo chown -R ubuntu:ubuntu /tmp/bundle
+  - bundle install --quiet --path /tmp/bundle
+  - cp config/drone.database.yml config/database.yml
   - bundle exec rake db:schema:load
   - bundle exec rspec spec
+cache:
+  - /tmp/bundle
+services:
+  - redis
+branches:
+  - master
+  - dev
+deploy:
+  bash:
+    script:
+      #- bundle exec cap production deploy
 notify:
   email:
     recipients:
