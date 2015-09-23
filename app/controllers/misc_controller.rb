@@ -1,5 +1,5 @@
 class MiscController < ApplicationController
   def ping
-    render json: {status: 'OK'}
+    render json: { status: 'OK' }
   end
 end
