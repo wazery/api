@@ -1,1 +1,1 @@
-- fix database_cleaner gem version
+- Fix database_cleaner gem version (Mohamed Yosrry)
