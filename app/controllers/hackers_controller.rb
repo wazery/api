@@ -1,19 +1,21 @@
+require 'open-uri'
+
 class HackersController < ApplicationController
-  ################# Documentation ######################################################################################
-  # api :GET, '/hackers/oauth', 'Authenticate hacker using an OAuth provider'
-  # description <<-EOS
-  #   returns:{
-  #     hacker: {
-  #       id:
-  #       token:
-  #       email:
-  #       name:
-  #     }
-  #   }
-  # EOS
-  # param :code, String, required: true
-  # error code: 401, desc: 'Authentication failed'
-  ################# /Documentation #####################################################################################
+  # Documentation
+  api :POST, '/hackers/oauth', 'Authenticate hacker using an OAuth provider'
+  description <<-EOS
+    returns:{
+      hacker: {
+        id:
+        token:
+        email:
+        name:
+      }
+    }
+  EOS
+  param :code, String, required: true
+  error code: 401, desc: 'Authentication failed'
+  # /Documentation
   def oauth
     hacker = Hacker.find_or_create_by_github_oauth_code(params[:code])
 
