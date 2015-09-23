@@ -7,7 +7,13 @@ SimpleCov.profiles.define 'no_vendor_coverage' do
   add_filter 'vendor' # Don't include vendored stuff
 end
 
-SimpleCov.start 'no_vendor_coverage'
+SimpleCov.start 'no_vendor_coverage' if ENV['COVERAGE']
+
+SimpleCov.at_exit do
+  SimpleCov.result.format!
+  puts 'Opening the coverage report..'
+  exec('open coverage/index.html')
+end
 
 Mongoid.configure do |config|
   config.connect_to('mongoid-rspec-test')
