@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'misc#ping'
 
   as :hackers do
-    post '/hackers/oauth' => 'hackers#oauth'
+    get '/hackers/oauth' => 'hackers#oauth'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,6 +1,6 @@
 class HackersController < ApplicationController
   ################# Documentation ######################################################################################
-  # api :POST, '/hackers/oauth', 'Authenticate hacker using an OAuth provider'
+  # api :GET, '/hackers/oauth', 'Authenticate hacker using an OAuth provider'
   # description <<-EOS
   #   returns:{
   #     hacker: {
