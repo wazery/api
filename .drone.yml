@@ -2,6 +2,7 @@ image: wazery/ruby:2.2.3
 script:
   - mkdir -p /tmp/bundle
   - bundle install --quiet --path /tmp/bundle
+  - bundle exec rubocop  
   - bundle exec rspec spec
 cache:
   - /tmp/bundle
