@@ -47,7 +47,7 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'simplecov', '~> 0.9.0'
+  gem 'simplecov', '~> 0.9.0', require: false
   gem 'rspec-rails'
   gem 'mongoid-rspec', '~> 2.1.0'
 end

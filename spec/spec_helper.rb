@@ -1,5 +1,13 @@
 require 'mongoid'
 require 'mongoid-rspec'
+require 'simplecov'
+
+SimpleCov.profiles.define 'no_vendor_coverage' do
+  load_profile 'rails'
+  add_filter 'vendor' # Don't include vendored stuff
+end
+
+SimpleCov.start 'no_vendor_coverage'
 
 Mongoid.configure do |config|
   config.connect_to('mongoid-rspec-test')
