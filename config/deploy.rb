@@ -13,11 +13,11 @@ set :deploy_to, '/home/deployer/hackhub-api/'
 # Default value for :scm is :git
 set :scm, :git
 
-# Default value for :format is :pretty
-set :format, :pretty
-
 # Default value for :log_level is :debug
 # set :log_level, :debug
+
+# Default value for :format is :pretty
+set :format, :pretty
 
 # Default value for :pty is false
 set :pty, true
@@ -42,7 +42,7 @@ set :linked_dirs, %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 
 # what specs should be run before deployment is allowed to
 # continue, see lib/capistrano/tasks/run_tests.cap
-# set :tests, ["spec"]
+set :tests, ['spec']
 
 # which config files should be copied by deploy:setup_config
 # see documentation in lib/capistrano/tasks/setup_config.cap
@@ -85,6 +85,11 @@ set(:symlinks, [
     link: '/etc/monit/conf.d/{{full_app_name}}.conf'
   }
 ])
+
+# Airbrush configurations
+Airbrussh.configure do |config|
+  config.command_output = true
+end
 
 # this:
 # http://www.capistranorb.com/documentation/getting-started/flow/

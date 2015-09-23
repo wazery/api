@@ -40,9 +40,9 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
-  # gem 'airbrush'
   gem 'sshkit-sudo' # For sudo prompts while deploying
   gem 'awesome_print', require: 'ap'
+  # gem 'airbrussh', require: false
 end
 
 group :test do
