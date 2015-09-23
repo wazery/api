@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  apipie
 
   get '~/ping', to: 'misc#ping'
   root to: 'misc#ping'

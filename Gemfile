@@ -28,6 +28,7 @@ gem 'rubocop', require: false
 
 # Documentation
 gem 'yard'
+gem 'apipie-rails'
 
 gem 'colorize'
 
