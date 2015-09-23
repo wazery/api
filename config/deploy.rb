@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'hackhub-api'
-set :repo_url, 'git@github.com:wazery/hh-api.git'
+set :repo_url, 'git@github.com:wazery/api.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
