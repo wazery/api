@@ -47,3 +47,6 @@ build/
 
 config/secrets.yml
 config/mongoid.yml
+
+# Ignore all coverage reports
+coverage
