@@ -1,7 +1,7 @@
 image: ruby:2.2.3
 script:
   - mkdir -p /tmp/bundle
-  - sudo chown -R ubuntu:ubuntu /tmp/bundle
+    #- sudo chown -R ubuntu:ubuntu /tmp/bundle
   - bundle install --quiet --path /tmp/bundle
   - cp config/drone.database.yml config/database.yml
   - bundle exec rake db:schema:load
