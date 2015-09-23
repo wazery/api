@@ -2,7 +2,7 @@ image: wazery/ruby:2.2.3
 script:
   - mkdir -p /tmp/bundle
   - bundle install --quiet --path /tmp/bundle
-  - bundle exec rubocop  
+  - bundle exec rubocop
   - bundle exec rspec spec
 cache:
   - /tmp/bundle
@@ -20,3 +20,10 @@ notify:
   email:
     recipients:
       - wazery@ubuntu.com
+  slack:
+    webhook_url: 'https://hooks.slack.com/services/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'
+    username: 'drone'
+    channel: '#notifications'
+    on_started: false
+    on_success: true
+    on_failure: true
