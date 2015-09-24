@@ -1,6 +1,8 @@
 require 'open-uri'
 
 class HackersController < ApplicationController
+  include Github::Endpoints
+
   # Documentation
   api :POST, '/hackers/oauth', 'Authenticate hacker using an OAuth provider'
   description <<-EOS
@@ -45,7 +47,7 @@ class HackersController < ApplicationController
 
     fail 'Authentication failed' unless hacker
 
-    redirect_to 'https://github.com'
+    redirect_to github_auth_url
   end
 
   private
@@ -56,10 +58,10 @@ class HackersController < ApplicationController
   end
 
   def redirect_uri
-    "#{root_url}/auth/callback?agent=&redirect=https://github.com"
+    "#{callback_url}?agent=&redirect=#{github_base_url}"
   end
 
   def github_auth_url
-    URI.encode("https://github.com/login/oauth/authorize?response_type=code&redirect_uri=#{redirect_uri}&scope=#{scopes}&client_id=#{Octokit.client_id}")
+    URI.encode("#{github_auth_url}?response_type=code&redirect_uri=#{redirect_uri}&scope=#{scopes}&client_id=#{Octokit.client_id}")
   end
 end
