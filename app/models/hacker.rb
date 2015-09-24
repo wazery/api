@@ -26,6 +26,7 @@ class Hacker
 
   index({ email: 1 }, unique: true, background: true)
   index({ github_token: 1 }, unique: true, background: true)
+  index({ api_secret: 1 }, unique: true, background: true)
 
   # Github Data
   field :raw_data, type: Hash
@@ -47,10 +48,13 @@ class Hacker
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX, message: 'is not valid email' }
   validates :name, presence: true
+  validates :avatar_url, presence: true
+  validates :display_name, presence: true
   validates :github_token, presence: true, uniqueness: true
+  validates :api_secret, presence: true, uniqueness: true
 
   # Callbacks
-  after_initialize :_set_defaults
+  after_initialize :_set_api_secret
 
   class << self
     # Creates the actual hacker into DB.
@@ -66,7 +70,7 @@ class Hacker
 
   private
 
-  def _set_defaults
+  def _set_api_secret
     self.api_secret ||= JWTToken.generate
   end
 
