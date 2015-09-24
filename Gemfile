@@ -6,7 +6,7 @@ gem 'rails-api'
 
 # gem 'activeresource'
 
-# Data related gems
+# NoSQL DBs
 gem 'mongoid', '~> 4.0.2'
 gem 'redis'
 gem 'hiredis'
@@ -24,18 +24,15 @@ gem 'faraday', '~> 0.9.0'
 # Auth related gems
 gem 'devise',   '~> 3.5.2'
 gem 'omniauth', '~> 1.2.2'
-gem 'octokit',  '~> 4.0'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
+gem 'bson_ext'
 
 # Use unicorn as the app server
 gem 'unicorn', group: :production
 
-gem 'rubocop', require: false
+gem 'rubocop', require: false, group: [:development, :test]
 
 # Documentation
 gem 'yard'
@@ -68,6 +65,7 @@ group :test do
   gem 'rspec-rails'
   gem 'mongoid-rspec', '~> 2.1.0'
   gem 'rspec-sidekiq'
+  gem 'webmock'
 end
 
 # To use debugger

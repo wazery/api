@@ -2,6 +2,8 @@
 class Hacker
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Github::Auth
+
   devise :registerable, :rememberable, :trackable,
          :omniauthable
 
@@ -30,10 +32,6 @@ class Hacker
   validates :name, presence: true
   validates :github_token, presence: true, uniqueness: true
 
-  # Class Attributes
-  cattr_writer :octokit
-  cattr_writer :octokit_client
-
   # Returns the formatted signed in hacker object
   #
   # @return [Hash] the formatted hacker object
@@ -49,26 +47,7 @@ class Hacker
   end
 
   class << self
-    def octokit
-      @@octokit || Octokit
-    end
-
-    # Returns the Octokit client object or create a new one.
-    #
-    # @return [Octokit::Client] the Octokit client object.
-    def octokit_client
-      @@octokit_client || Octokit::Client
-    end
-
-    # Returns the Github client object.
-    #
-    # @param access_token [String] the Github access token
-    # @return [Octokit::Client] the Octokit::Client object with the proper access token.
-    def github_client(access_token)
-      octokit_client.new(access_token: access_token)
-    end
-
-    # Returns the hacker signed up.
+    # Created the actual hacker into DB.
     #
     # @param data [Hash] the data needed to signup the hacker
     # @return [Hacker] a signed up hacker.
@@ -84,39 +63,26 @@ class Hacker
       hacker = find_by_github_access_token(access_token)
       return hacker if hacker
 
-      hacker = sign_up(info_by_github_access_token(access_token))
-      hacker
+      sign_up(fetch_github_user_profile(access_token))
     end
 
     def find_by_github_access_token(access_token)
       where(github_token: access_token).first
     end
 
-    def info_by_github_access_token(access_token)
-      client = github_client(access_token)
-      hacker = client.user
-
-      # cached_emails = REDIS.get(github_emails_cache_key(access_token))
-      # emails = JSON.parse(cached_emails) if cached_emails
-      email = client.emails.first[:email] # unless cached_emails
-      # TODO: Check why reject those emails?
-      # emails = emails.reject { |email| email =~ /@hackers\.noreply\.github\.com$/ }
-
-      name = hacker.name.blank? ? email.partition('@').first : hacker.name
-
-      { email: email, name: name, github_token: access_token }
-    end
-
-    private
-
-    def fetch_github_access_token(code)
-      ret = octokit.exchange_code_for_token(code)
-
-      return ret[:access_token] if ret[:access_token]
-
-      # TODO: Handling exception
-      fail ret[:error_description] if ret[:error]
-      fail 'Falied fetching access token'
-    end
+    # def info_by_github_access_token(access_token)
+    #   client = github_client(access_token) # FIXME
+    #   hacker = client.user # FIXME
+    #
+    #   # cached_emails = REDIS.get(github_emails_cache_key(access_token))
+    #   # emails = JSON.parse(cached_emails) if cached_emails
+    #   email = client.emails.first[:email] # unless cached_emails
+    #   # TODO: Check why reject those emails?
+    #   # emails = emails.reject { |email| email =~ /@hackers\.noreply\.github\.com$/ }
+    #
+    #   name = hacker.name.blank? ? email.partition('@').first : hacker.name
+    #
+    #   { email: email, name: name, github_token: access_token }
+    # end
   end
 end
