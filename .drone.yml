@@ -15,7 +15,7 @@ branches:
 deploy:
   bash:
     script:
-      #- bundle exec cap production deploy
+      - bundle exec cap production deploy
 notify:
   email:
     recipients:
