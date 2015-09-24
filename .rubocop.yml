@@ -58,10 +58,10 @@ Metrics/MethodLength:
   Enabled: false
 
 Metrics/PerceivedComplexity:
-  Enabled: trye
+  Enabled: true
 
 Metrics/CyclomaticComplexity:
-  Enabled: trye
+  Enabled: true
 
 Metrics/LineLength:
   Enabled: false
