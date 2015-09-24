@@ -1,13 +1,17 @@
 # The priority is based upon order of creation: first created -> highest priority.
 # See how all your routes lay out with "rake routes".
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   apipie
 
   root to: 'misc#ping'
 
-  as :hackers do
-    get '/hackers/auth', to: 'hackers#auth'
-    get '/hackers/auth/callback', to: 'hackers#callback'
-    post '/hackers/oauth', to: 'hackers#oauth'
+  scope :api do
+    resources :hackers, only: [:show, :update]
+    resource :sessions, only: [:create, :show, :destroy]
+    get 'login_callback', to: 'sessions#login_callback'
+    get 'private_access_callback', to: 'sessions#private_access_callback'
+    mount Sidekiq::Web, at: '/sidekiq'
   end
 end
