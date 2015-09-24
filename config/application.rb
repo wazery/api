@@ -1,11 +1,12 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 # require 'active_model/railtie'
 # require 'active_job/railtie'
 # require "active_record/railtie"
+
+require 'multi_json'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -20,14 +21,14 @@ module Api
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Mongoid.logger.level = Logger::DEBUG
-    # Moped.logger.level = Logger::DEBUG
+    Mongoid.logger.level = Logger::DEBUG
+    Moped.logger.level = Logger::DEBUG
 
     # This's to fix awesome_print with mongoid
-    # console do
-    #    ::Moped::BSON = ::BSON
-    #    AwesomePrint.pry!
-    # end
+    console do
+      ::Moped::BSON = ::BSON
+      AwesomePrint.pry!
+    end
 
     config.generators do |g|
       g.test_framework :rspec, fixture: true

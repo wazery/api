@@ -12,14 +12,11 @@ gem 'redis'
 gem 'hiredis'
 
 # HTTP Requests
-gem 'faraday', '~> 0.9.0'
+gem 'faraday'
 
 # Authentication
 gem 'micro_token'
 gem 'jwt'
-
-# HTTP Requests
-gem 'faraday', '~> 0.9.0'
 
 # Auth related gems
 gem 'devise',   '~> 3.5.2'

@@ -1,6 +1,7 @@
 require 'mongoid'
 require 'mongoid-rspec'
 require 'simplecov'
+require 'webmock/rspec'
 
 SimpleCov.profiles.define 'no_vendor_coverage' do
   load_profile 'rails'
