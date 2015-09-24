@@ -1,7 +1,10 @@
 module Github
   # Basic authentication service for Github
   module Auth
-    include Endpoints
+    extend Endpoints
+
+    # Exceptions
+    NotAuthorized = Class.new(Exception)
 
     module_function
 
@@ -13,7 +16,7 @@ module Github
     def basic_auth_with_github(github_params)
       # TODO: add login counters, time, and date
 
-      github_profile, access_token = fetch_github_user_profile(github_params)
+      github_profile, access_token = fetch_github_hacker_profile(github_params)
 
       unless github_profile[:id]
         return { status: false, message: github_profile[:message] }
@@ -48,7 +51,7 @@ module Github
     # @param github_params [String]
     # @return auth_status [Hash]
     def auth_private_access(github_params)
-      github_profile, access_token = fetch_github_user_profile(github_params)
+      github_profile, access_token = fetch_github_hacker_profile(github_params)
 
       unless github_profile[:id]
         return { status: false, message: github_profile[:message] }
@@ -70,7 +73,7 @@ module Github
         return { status: true, hacker: hacker }
       end
 
-      { status: false, error: 'you should sign in first hacker' }
+      { status: false, error: 'You should sign in first hacker' }
     end
 
     # Fetches the hacker profile data from Github API
@@ -78,7 +81,7 @@ module Github
     #
     # @param github_params [String]
     # @return github_profile, access_token [Hash, String]
-    def fetch_github_user_profile(github_params)
+    def fetch_github_hacker_profile(github_params)
       access_token = fetch_github_access_token(github_params)
 
       conn = Faraday.new(url: github_api_base_url)
@@ -87,7 +90,7 @@ module Github
         req.headers = { Authorization: "token #{access_token}" }
       end
 
-      MultiJson.load response.body, access_token
+      [(MultiJson.load response.body, symbolize_keys: true), access_token]
     end
 
     # Fetches an access token from the Github API
