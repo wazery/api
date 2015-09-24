@@ -5,6 +5,74 @@ module Github
 
     module_function
 
+    # Authenticates the hacker with the public access application
+    # This method is used in login only
+    #
+    # @param github_params [String]
+    # @return auth_status [Hash]
+    def basic_auth_with_github(github_params)
+      # TODO: add login counters, time, and date
+
+      github_profile, access_token = fetch_github_user_profile(github_params)
+
+      unless github_profile[:id]
+        return { status: false, message: github_profile[:message] }
+      end
+
+      hacker = Hacker.where(github_uid: github_profile[:id]).first
+
+      unless hacker
+        hacker = Hacker.sign_up(
+          email: github_profile[:email],
+          avatar_url: github_profile[:avatar_url],
+          username: github_profile[:login],
+          github_uid: github_profile[:id],
+          display_name: github_profile[:name],
+          company: github_profile[:company],
+          public_app_github_access_token: access_token,
+          public_repos: github_profile[:public_repos],
+          public_gists: github_profile[:public_gists],
+          raw_data: github_profile,
+          current_scope: ''
+        )
+
+        return { status: true, hacker: hacker, new_hacker: true }
+      end
+
+      { status: true, hacker: hacker, new_hacker: false }
+    end
+
+    # Authenticates the hacker with the private access application
+    # This method is used to add permissions to access private repos and hacker info
+    #
+    # @param github_params [String]
+    # @return auth_status [Hash]
+    def auth_private_access(github_params)
+      github_profile, access_token = fetch_github_user_profile(github_params)
+
+      unless github_profile[:id]
+        return { status: false, message: github_profile[:message] }
+      end
+
+      hacker = Hacker.where(github_uid: github_profile[:id]).first
+
+      if hacker
+        hacker.update_attributes(
+          email: github_profile[:email],
+          private_gists:       github_profile[:private_gists],
+          total_private_repos: github_profile[:total_private_repos],
+          owned_private_repos: github_profile[:owned_private_repos],
+          private_app_github_access_token: access_token,
+          raw_data: github_profile,
+          current_scope: 'user, repo'
+        )
+
+        return { status: true, hacker: hacker }
+      end
+
+      { status: false, error: 'you should sign in first hacker' }
+    end
+
     # Fetches the hacker profile data from Github API
     # based on the access_token
     #
