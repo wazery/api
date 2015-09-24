@@ -18,6 +18,9 @@ gem 'faraday', '~> 0.9.0'
 gem 'micro_token'
 gem 'jwt'
 
+# HTTP Requests
+gem 'faraday', '~> 0.9.0'
+
 # Auth related gems
 gem 'devise',   '~> 3.5.2'
 gem 'omniauth', '~> 1.2.2'
