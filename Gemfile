@@ -29,6 +29,8 @@ gem 'omniauth', '~> 1.2.2'
 # gem 'jbuilder'
 gem 'bson_ext'
 
+gem 'active_model_serializers'
+
 # Use unicorn as the app server
 gem 'unicorn', group: :production
 

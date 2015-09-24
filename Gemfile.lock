@@ -20,6 +20,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
     activejob (4.2.4)
       activesupport (= 4.2.4)
       globalid (>= 0.3.0)
@@ -48,6 +50,7 @@ GEM
     awesome_print (1.6.1)
     bcrypt (3.1.10)
     bson (3.2.4)
+    bson_ext (1.5.1)
     builder (3.2.2)
     byebug (6.0.2)
     capistrano (3.4.0)
@@ -109,6 +112,8 @@ GEM
       timers (>= 4.1.1)
     colorize (0.7.7)
     connection_pool (2.2.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     database_cleaner (1.4.1)
     devise (3.5.2)
       bcrypt (~> 3.0)
@@ -166,8 +171,6 @@ GEM
     net-ssh (2.9.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    octokit (4.1.0)
-      sawyer (~> 0.6.0, >= 0.5.3)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -249,9 +252,7 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.7.5)
-    sawyer (0.6.0)
-      addressable (~> 2.3.5)
-      faraday (~> 0.8, < 0.10)
+    safe_yaml (1.0.4)
     sidekiq (3.5.0)
       celluloid (~> 0.17.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -293,15 +294,20 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    webmock (1.21.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
     yard (0.8.7.6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   airbrussh
   apipie-rails
   awesome_print
+  bson_ext
   byebug
   capistrano
   capistrano-bundler
@@ -318,7 +324,6 @@ DEPENDENCIES
   micro_token
   mongoid (~> 4.0.2)
   mongoid-rspec (~> 2.1.0)
-  octokit (~> 4.0)
   omniauth (~> 1.2.2)
   rails (= 4.2.4)
   rails-api
@@ -332,6 +337,7 @@ DEPENDENCIES
   spring
   sshkit-sudo
   unicorn
+  webmock
   yard
 
 BUNDLED WITH
