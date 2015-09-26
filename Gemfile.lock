@@ -20,6 +20,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
     activejob (4.2.4)
       activesupport (= 4.2.4)
       globalid (>= 0.3.0)
@@ -37,6 +39,8 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    airbrussh (0.7.0)
+      sshkit (>= 1.6.1, != 1.7.0)
     apipie-rails (0.3.4)
       json
     arel (6.0.3)
@@ -44,10 +48,10 @@ GEM
     astrolabe (1.3.1)
       parser (~> 2.2)
     awesome_print (1.6.1)
-    bcrypt (3.1.10)
     bson (3.2.4)
     bson_ext (1.5.1)
     builder (3.2.2)
+    byebug (6.0.2)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -107,14 +111,9 @@ GEM
       timers (>= 4.1.1)
     colorize (0.7.7)
     connection_pool (2.2.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     database_cleaner (1.4.1)
-    devise (3.5.2)
-      bcrypt (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
-      responders
-      thread_safe (~> 0.1)
-      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
     dotenv (2.0.2)
@@ -128,15 +127,17 @@ GEM
       multipart-post (>= 1.2, < 3)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    hashie (3.4.2)
+    hiredis (0.6.0)
     hitimes (1.2.3)
     i18n (0.7.0)
     json (1.8.3)
+    jwt (1.5.1)
     kgio (2.10.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    micro_token (0.0.3)
     mime-types (2.6.2)
     mini_portile (0.6.2)
     minitest (5.8.0)
@@ -161,18 +162,14 @@ GEM
     net-ssh (2.9.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    octokit (4.1.0)
-      sawyer (~> 0.6.0, >= 0.5.3)
-    omniauth (1.2.2)
-      hashie (>= 1.2, < 4)
-      rack (~> 1.0)
     optionable (0.2.0)
     origin (2.1.1)
-    orm_adapter (0.5.0)
     parser (2.2.2.6)
       ast (>= 1.1, < 3.0)
     powerpack (0.1.1)
     rack (1.6.4)
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.4)
@@ -208,8 +205,6 @@ GEM
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    responders (2.1.0)
-      railties (>= 4.2.0, < 5)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -242,9 +237,7 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.7.5)
-    sawyer (0.6.0)
-      addressable (~> 2.3.5)
-      faraday (~> 0.8, < 0.10)
+    safe_yaml (1.0.4)
     sidekiq (3.5.0)
       celluloid (~> 0.17.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -256,6 +249,10 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.9.0)
     simplecov-html (0.9.0)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     spring (1.4.0)
     sprockets (3.3.4)
       rack (~> 1.0)
@@ -271,6 +268,7 @@ GEM
       sshkit
     thor (0.19.1)
     thread_safe (0.3.5)
+    tilt (2.0.1)
     timers (4.1.1)
       hitimes
     tzinfo (1.2.2)
@@ -279,17 +277,21 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    warden (1.2.3)
-      rack (>= 1.0)
+    webmock (1.21.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
     yard (0.8.7.6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
+  airbrussh
   apipie-rails
   awesome_print
   bson_ext
+  byebug
   capistrano
   capistrano-bundler
   capistrano-rails
@@ -297,22 +299,26 @@ DEPENDENCIES
   capistrano-secrets-yml (~> 1.0.0)
   colorize
   database_cleaner (~> 1.4.1)
-  devise (~> 3.5.2)
   factory_girl_rails
+  faraday
+  hiredis
+  jwt
+  micro_token
   mongoid (~> 4.0.2)
   mongoid-rspec (~> 2.1.0)
-  octokit (~> 4.0)
-  omniauth (~> 1.2.2)
   rails (= 4.2.4)
   rails-api
+  redis
   rspec-rails
   rspec-sidekiq
   rubocop
   sidekiq
   simplecov (~> 0.9.0)
+  sinatra
   spring
   sshkit-sudo
   unicorn
+  webmock
   yard
 
 BUNDLED WITH

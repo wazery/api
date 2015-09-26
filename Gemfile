@@ -6,25 +6,28 @@ gem 'rails-api'
 
 # gem 'activeresource'
 
-# Data related gems
+# NoSQL DBs
 gem 'mongoid', '~> 4.0.2'
-gem 'bson_ext'
+gem 'redis'
+gem 'hiredis'
 
-# Auth related gems
-gem 'devise',   '~> 3.5.2'
-gem 'omniauth', '~> 1.2.2'
-gem 'octokit',  '~> 4.0'
+# HTTP Requests
+gem 'faraday'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# Authentication
+gem 'micro_token'
+gem 'jwt'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
+gem 'bson_ext'
+
+gem 'active_model_serializers'
 
 # Use unicorn as the app server
 gem 'unicorn', group: :production
 
-gem 'rubocop', require: false
+gem 'rubocop', require: false, group: [:development, :test]
 
 # Documentation
 gem 'yard'
@@ -34,6 +37,7 @@ gem 'colorize'
 
 # Background workers
 gem 'sidekiq'
+gem 'sinatra' # For the Sidekiq panel
 
 group :development do
   gem 'spring'
@@ -45,7 +49,8 @@ group :development do
   gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
   gem 'sshkit-sudo' # For sudo prompts while deploying
   gem 'awesome_print', require: 'ap'
-  # gem 'airbrussh', require: false
+  gem 'airbrussh', require: false
+  gem 'byebug'
 end
 
 group :test do
@@ -55,6 +60,7 @@ group :test do
   gem 'rspec-rails'
   gem 'mongoid-rspec', '~> 2.1.0'
   gem 'rspec-sidekiq'
+  gem 'webmock'
 end
 
 # To use debugger

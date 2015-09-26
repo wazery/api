@@ -2,6 +2,7 @@ image: wazery/ruby:2.2.3
 script:
   - mkdir -p /tmp/bundle
   - bundle install --quiet --path /tmp/bundle
+  - mv config/drone.secrets.yml config/secrets.yml
   - bundle exec rubocop
   - bundle exec rspec spec
 cache:
