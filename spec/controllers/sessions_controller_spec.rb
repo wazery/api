@@ -7,7 +7,7 @@ RSpec.describe SessionsController do
     context 'with a valid code' do
       before(:all) do
         # Stub call in services/github/auth#fetch_github_access_token
-        WebMock.stub_request(:get, "#{github_base_url}/login/oauth/access_token")
+        WebMock.stub_request(:get, github_token_exchange_url)
           .with(query: { client_id: github_client_id, redirect_uri: '', client_secret: github_client_secret, code: 'valid_code' })
           .to_return(body: 'access_token=access_token&scope=user%2Cgist&token_type=bearer', status: 200)
         # Stub call in services/github.auth#fetch_github_hacker_profile
