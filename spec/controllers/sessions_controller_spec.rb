@@ -5,7 +5,7 @@ include Github::Endpoints
 RSpec.describe SessionsController do
   describe 'POST sessions#create' do
     context 'with a valid code' do
-      before(:all) do
+      before(:each) do
         # Stub call in services/github/auth#fetch_github_access_token
         WebMock.stub_request(:get, github_token_exchange_url)
           .with(query: { client_id: github_client_id, redirect_uri: '', client_secret: github_client_secret, code: 'valid_code' })
@@ -59,6 +59,18 @@ RSpec.describe SessionsController do
         expect(json_response[:hacker]).to have_key :email
         expect(json_response[:hacker]).to have_key :avatar_url
         expect(json_response[:hacker]).to have_key :display_name
+      end
+      it 'returns already created hacker from the db' do
+        post :create, code: 'valid_code'
+        expect(Hacker.count).to eq 1
+        expect(response.status).to eq 200
+        json_response = JSON.parse(response.body, symbolize_names: true)
+        hacker_token  = json_response[:token]
+        post :create, code: 'valid_code'
+        expect(Hacker.count).to eq 1
+        expect(response.status).to eq 200
+        json_response = JSON.parse(response.body, symbolize_names: true)
+        expect(json_response[:token]).to eq hacker_token
       end
     end
   end
