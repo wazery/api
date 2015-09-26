@@ -1,3 +1,7 @@
+v0.1.1 - Fix basic OAuth signup with Github - PR#9 (26 Sep 2015)
+===
+  - Fix basic OAuth signup with Github - 210f06e
+
 v0.1.0 - Authentication - PR#8 (25 Sep 2015)
 ===
   - Refactor the hacker model, with some Yard docs - 76ddbd6

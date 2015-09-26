@@ -23,7 +23,6 @@ module Github
       end
 
       hacker = Hacker.where(github_uid: github_profile[:id]).first
-
       unless hacker
         hacker = Hacker.sign_up(
           email: github_profile[:email],
@@ -31,11 +30,12 @@ module Github
           username: github_profile[:login],
           github_uid: github_profile[:id],
           display_name: github_profile[:name],
+          name: github_profile[:name],
           company: github_profile[:company],
           public_app_github_access_token: access_token,
-          public_repos: github_profile[:public_repos],
           public_gists: github_profile[:public_gists],
           raw_data: github_profile,
+          github_token: access_token,
           current_scope: ''
         )
 
