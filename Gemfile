@@ -18,10 +18,6 @@ gem 'faraday'
 gem 'micro_token'
 gem 'jwt'
 
-# Auth related gems
-gem 'devise',   '~> 3.5.2'
-gem 'omniauth', '~> 1.2.2'
-
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 gem 'bson_ext'

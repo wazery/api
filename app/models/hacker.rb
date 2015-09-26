@@ -4,9 +4,6 @@ class Hacker
   include Mongoid::Timestamps
   include Github::Auth
 
-  devise :registerable, :rememberable, :trackable,
-         :omniauthable
-
   field :email, type: String, default: ''
 
   # Rememberable
@@ -35,10 +32,12 @@ class Hacker
   field :api_secret, type: String
   field :avatar_url, type: String
   field :display_name, type: String
-  field :public_repos, type: Integer
+  # TODO: change to total watched repos
+  field :total_watched_repos, type: Integer
   field :public_gists, type: Integer
   field :current_scope, type: String # '' or 'user, repo'
   field :private_gists, type: Integer
+  # TODO: change to total watcehd repos
   field :total_private_repos, type: Integer
   field :owned_private_repos, type: Integer
   field :private_app_github_access_token, type: String
