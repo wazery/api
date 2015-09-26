@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   scope :api do
     resources :hackers, only: [:show, :update]
     resource :sessions, only: [:create, :show, :destroy]
-    get 'login_callback', to: 'sessions#login_callback'
+    # get 'auth/github', to: 'sessions#initiate_login'
+    # get 'login_callback', to: 'sessions#login_callback'
     get 'private_access_callback', to: 'sessions#private_access_callback'
     mount Sidekiq::Web, at: '/sidekiq'
   end

@@ -25,8 +25,8 @@ class SessionsController < ApplicationController
     # TODO: Handle the reject access case, and expired tokens
 
     github_params = {
-      client_id: params[:clientId],
-      redirect_uri: params[:redirectUri],
+      client_id: github_client_id,
+      redirect_uri: params[:redirect_uri],
       client_secret: github_client_secret,
       code: params['code']
     }
@@ -55,14 +55,28 @@ class SessionsController < ApplicationController
     render nothing: true, status: 204
   end
 
-  def login_callback
-    # TODO: set the URL in the ENV
-    if params[:source] == 'Angular'
-      redirect_to "#{request.env['HTTP_REFERER']}?code=#{params[:code]}"
-    else
-      redirect_to "#{request.env['HTTP_REFERER']}?code=#{params[:code]}&redirect=#{github_base_url}"
-    end
-  end
+  # def login_callback
+  #   # if params[:source] == 'Angular'
+  #     # redirect_to "#{request.env['HTTP_REFERER']}?code=#{params[:code]}"
+  #   # else
+  #     # FIXME:
+  #     # create_session({ client_id: github_client_id, code: params[:code], redirect_uri: github_base_url })
+  #     redirect_to sessions_url
+  #     # redirect_to :create
+  #   # end
+  # end
+
+  # Initiates authorization process for the Chrome extension
+  #
+  # Redirects to the Github authorization endpoint
+  # def initiate_login
+  #   params = {
+  #     response_type: 'code',
+  #     redirect_uri: login_callback_url,
+  #     client_id: github_client_id
+  #   }
+  #   redirect_to "#{github_auth_url}?#{params.to_param}"
+  # end
 
   def private_access_callback
     # github_params = {

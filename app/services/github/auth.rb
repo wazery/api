@@ -106,7 +106,7 @@ module Github
       end
 
       # TODO: Handle exceptions
-      # fail 'Failed fetching access token'
+      fail 'Failed fetching access token' unless response.body
       response.body.match('\=(.*?)\&')[1]
     end
   end
