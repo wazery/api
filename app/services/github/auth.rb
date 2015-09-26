@@ -15,8 +15,11 @@ module Github
     # @return auth_status [Hash]
     def basic_auth_with_github(github_params)
       # TODO: add login counters, time, and date
-
-      github_profile, access_token = fetch_github_hacker_profile(github_params)
+      begin
+        github_profile, access_token = fetch_github_hacker_profile(github_params)
+      rescue NotAuthorized
+        return { status: false, message: 'Authenication Failed' }
+      end
 
       unless github_profile[:id]
         return { status: false, message: github_profile[:message] }
@@ -105,8 +108,7 @@ module Github
         req.params = github_params
       end
 
-      # TODO: Handle exceptions
-      fail 'Failed fetching access token' unless response.body
+      fail NotAuthorized, 'Failed fetching access token' if response.status == 404
       response.body.match('\=(.*?)\&')[1]
     end
   end
