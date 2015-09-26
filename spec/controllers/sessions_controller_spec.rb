@@ -1,4 +1,5 @@
 require 'rails_helper'
+include Config
 include Github::Endpoints
 
 RSpec.describe SessionsController do
@@ -7,7 +8,7 @@ RSpec.describe SessionsController do
       before(:all) do
         # Stub call in services/github/auth#fetch_github_access_token
         WebMock.stub_request(:get, "#{github_base_url}/login/oauth/access_token")
-          .with(query: { client_id: '', redirect_uri: '', client_secret: '', code: 'valid_code' })
+          .with(query: { client_id: github_client_id, redirect_uri: '', client_secret: github_client_secret, code: 'valid_code' })
           .to_return(body: 'access_token=access_token&scope=user%2Cgist&token_type=bearer', status: 200)
         # Stub call in services/github.auth#fetch_github_hacker_profile
         WebMock.stub_request(:get, "#{github_api_base_url}/user")
@@ -47,7 +48,7 @@ RSpec.describe SessionsController do
       end
       it 'return a new created hacker' do
         post :create, code: 'valid_code'
-        expect(Hacker.count).to    eq 1
+        expect(Hacker.count).to eq 1
         expect(response.status).to eq 200
         json_response = JSON.parse(response.body, symbolize_names: true)
         expect(json_response).to have_key :token
