@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
                      last_seen: current_api_session_token.last_seen,
                      hacker: (HackerSerializer.new current_hacker, root: false) }
     else
-      render json: { error: auth_status[:message] }
+      render json: { error: auth_status[:message] }, status: :unauthorized
     end
   end
 

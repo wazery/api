@@ -1,3 +1,7 @@
+v0.1.2 - Handle failure of fetching Github access token - PR#11 (27 Sep 2015)
+===
+  - Handle failure of fetching access token - 7a79d74
+
 v0.1.1 - Fix basic OAuth signup with Github - PR#9 (26 Sep 2015)
 ===
   - Fix basic OAuth signup with Github - 210f06e
