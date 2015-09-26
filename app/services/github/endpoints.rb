@@ -3,7 +3,8 @@ module Github
     @endpoints = {
       base: 'https://github.com',
       api_base: 'https://api.github.com',
-      auth: 'https://github.com/login/oauth/authorize'
+      auth: 'https://github.com/login/oauth/authorize',
+      token_exchange: 'https://github.com/login/oauth/access_token'
     }
 
     # Returns all of the endpoints, for easy listing
