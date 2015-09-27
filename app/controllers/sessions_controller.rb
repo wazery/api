@@ -56,26 +56,11 @@ class SessionsController < ApplicationController
   end
 
   # def login_callback
-  #   # if params[:source] == 'Angular'
-  #     # redirect_to "#{request.env['HTTP_REFERER']}?code=#{params[:code]}"
-  #   # else
-  #     # FIXME:
-  #     # create_session({ client_id: github_client_id, code: params[:code], redirect_uri: github_base_url })
-  #     redirect_to sessions_url
-  #     # redirect_to :create
-  #   # end
-  # end
-
-  # Initiates authorization process for the Chrome extension
-  #
-  # Redirects to the Github authorization endpoint
-  # def initiate_login
-  #   params = {
-  #     response_type: 'code',
-  #     redirect_uri: login_callback_url,
-  #     client_id: github_client_id
-  #   }
-  #   redirect_to "#{github_auth_url}?#{params.to_param}"
+  #   if params[:source] == 'Angular'
+  #     redirect_to "#{request.env['HTTP_REFERER']}?code=#{params[:code]}"
+  #   else
+  #     create_session({ client_id: github_client_id, code: params[:code], redirect_uri: github_base_url })
+  #   end
   # end
 
   def private_access_callback
