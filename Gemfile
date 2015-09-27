@@ -13,6 +13,7 @@ gem 'hiredis'
 
 # HTTP Requests
 gem 'faraday'
+gem 'rack-cors', require: 'rack/cors'
 
 # Authentication
 gem 'micro_token'
@@ -21,6 +22,7 @@ gem 'jwt'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 gem 'bson_ext'
+gem 'multi_json'
 
 gem 'active_model_serializers'
 
