@@ -86,6 +86,37 @@ set(:symlinks, [
   }
 ])
 
+# Slack integration
+set :slack_webhook, 'https://hooks.slack.com/services/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'
+set :slack_icon_url, -> { 'http://profguys.com/assets/logos/capistrano-a9bacaecad4b9089a5b8defc1449dd6f.png' }
+set :slack_username, -> { 'capistrano' }
+set :slack_revision, `git rev-parse origin/master`.strip!
+set :slack_title_finished, 'Finished deploying'
+set :slack_msg_finished, nil
+set :slack_fallback_finished, "#{fetch(:slack_deploy_user)} deployed #{fetch(:application)} on #{fetch(:stage)}"
+set :slack_fields_finished, [
+  {
+    'title': 'Project',
+    'value': "<https://github.com/XXXXX/#{fetch(:application)}|#{fetch(:application)}>",
+    'short': true
+  },
+  {
+    'title': 'Environment',
+    'value': fetch(:stage),
+    'short': true
+  },
+  {
+    'title': 'Deployer',
+    'value': fetch(:slack_deploy_user),
+    'short': true
+  },
+  {
+    'title': 'Revision',
+    'value': "<https://github.com/XXXXX/#{fetch(:application)}/commit/#{fetch(:slack_revision)}|#{fetch(:slack_revision)[0..6]}>",
+    'short': true
+  }
+]
+
 # Airbrush configurations
 Airbrussh.configure do |config|
   config.command_output = true

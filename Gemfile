@@ -24,6 +24,9 @@ gem 'jwt'
 gem 'bson_ext'
 gem 'multi_json'
 
+# Slack integration for Capistrano
+gem 'slackistrano', require: false
+
 gem 'active_model_serializers'
 
 # Use unicorn as the app server
