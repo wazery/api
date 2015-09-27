@@ -5,6 +5,7 @@ api:
     - "3000:3000"
   links: 
     - database
+    - redis
   volumes:
     - .:/hackhub
 
@@ -13,3 +14,7 @@ database:
   ports: 
     - "27017:27017"
 
+redis:
+  image: redis:3.0.4
+  ports:
+    - "6379":"6379"
