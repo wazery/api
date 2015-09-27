@@ -9,7 +9,7 @@ module Github
     #
     # @param name [String]
     def fetch_watched_repos(name)
-      hacker = Hacker.find(name: name)
+      hacker = Hacker.where(name: name)
 
       conn = Faraday.new(url: github_subscriptions_url(name))
 
@@ -25,7 +25,7 @@ module Github
     #
     # @param name [String]
     def fetch_followed_users(name)
-      hacker = Hacker.find(name: name)
+      hacker = Hacker.where(name: name)
 
       conn = Faraday.new(url: hacker.following_url)
 

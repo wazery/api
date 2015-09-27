@@ -2,6 +2,7 @@
 class Hacker
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Attributes::Dynamic
   include Github::Auth
 
   field :email, type: String, default: ''
@@ -25,11 +26,13 @@ class Hacker
   field :company, type: String
   field :api_secret, type: String
   field :avatar_url, type: String
+  field :name, type: String
   field :display_name, type: String
   field :total_watched_repos, type: Integer
   field :total_followed_user, type: Integer
   field :total_public_gists, type: Integer
   field :total_private_gists, type: Integer
+  field :public_gists, type: Integer
   field :watched_repos, type: Hash
   field :followed_users, type: Hash
   field :following_url, type: String

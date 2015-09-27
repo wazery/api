@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       client_id: github_client_id,
       redirect_uri: params[:redirect_uri],
       client_secret: github_client_secret,
-      code: params['code']
+      code: params[:code]
     }
 
     auth_status = Github::Auth.basic_auth_with_github github_params
