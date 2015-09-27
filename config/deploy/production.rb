@@ -8,7 +8,7 @@
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
 set :stage, :production
-set :branch, 'feature/v0.1.0-github_authentication'
+set :branch, 'dev'
 
 set :server_name, 'api.hackhub.io'
 # set :server_name, '107.170.53.125'
