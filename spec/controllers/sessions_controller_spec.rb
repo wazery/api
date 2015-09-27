@@ -73,5 +73,19 @@ RSpec.describe SessionsController do
         expect(json_response[:token]).to eq hacker_token
       end
     end
+
+    context 'with an invalid code' do
+      before(:each) do
+        WebMock.stub_request(:get, github_token_exchange_url)
+          .with(query: { client_id: github_client_id, redirect_uri: '', client_secret: github_client_secret, code: 'invalid_code' })
+          .to_return(body: '{"error": "Not Found"}', status: 404)
+      end
+      it 'return an authenication failed status and message' do
+        post :create, code: 'invalid_code'
+        expect(response.status).to eq 401
+        json_response = JSON.parse(response.body, symbolize_names: true)
+        expect(json_response[:error]).to eq 'Authenication Failed'
+      end
+    end
   end
 end
