@@ -17,31 +17,32 @@ class Hacker
   field :last_sign_in_ip,    type: String
 
   # Omniauthable
-  field :name,               type: String, default: ''
   field :github_token,       type: String, default: ''
   field :github_uid, type: String
-
-  index({ email: 1 }, unique: true, background: true)
-  index({ github_token: 1 }, unique: true, background: true)
-  index({ api_secret: 1 }, unique: true, background: true)
 
   # Github Data
   field :raw_data, type: Hash
   field :company, type: String
-  field :username, type: String
   field :api_secret, type: String
   field :avatar_url, type: String
   field :display_name, type: String
-  # TODO: change to total watched repos
   field :total_watched_repos, type: Integer
-  field :public_gists, type: Integer
+  field :total_followed_user, type: Integer
+  field :total_public_gists, type: Integer
+  field :total_private_gists, type: Integer
+  field :watched_repos, type: Hash
+  field :followed_users, type: Hash
+  field :following_url, type: String
   field :current_scope, type: String # '' or 'user, repo'
-  field :private_gists, type: Integer
-  # TODO: change to total watcehd repos
   field :total_private_repos, type: Integer
   field :owned_private_repos, type: Integer
   field :private_app_github_access_token, type: String
   field :public_app_github_access_token, type: String
+
+  # Indexes
+  index({ email: 1 }, unique: true, background: true)
+  index({ github_token: 1 }, unique: true, background: true)
+  index({ api_secret: 1 }, unique: true, background: true)
 
   # Validations
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -54,6 +55,10 @@ class Hacker
 
   # Callbacks
   after_initialize :_set_api_secret
+  after_initialize :_initialize_github_data
+
+  # Relations
+  has_many :repos
 
   class << self
     # Creates the actual hacker into DB.
@@ -71,6 +76,10 @@ class Hacker
 
   def _set_api_secret
     self.api_secret ||= JWTToken.generate
+  end
+
+  def _initialize_github_data
+    BasicDataWorker.perform_async(name)
   end
 
   def private_access_granted?
