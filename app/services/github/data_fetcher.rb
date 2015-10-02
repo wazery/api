@@ -30,7 +30,9 @@ module Github
         watched_repos << (MultiJson.load response.body, symbolize_keys: true)
       end
 
-      hacker.watched_repos = watched_repos
+      hacker.watched_repos = formatted_hash(watched_repos, [
+        :id, :name, :full_name, :private, :url, :issue_events_url, :events_url
+      ])
       hacker.save
     end
 
@@ -41,7 +43,7 @@ module Github
     def fetch_followed_users(name, github_token)
       hacker = Hacker.where(name: name, github_token: github_token).first
 
-      conn = Faraday.new(url: hacker.raw_data[:following_url].gsub(%r{/(\{\/other_user\})/}, ''))
+      conn = Faraday.new(url: hacker.raw_data[:following_url].gsub(/(\{\/other_user\})/, ''))
       followed_users = []
 
       10_000.times.each do |page|
@@ -61,8 +63,23 @@ module Github
         followed_users << (MultiJson.load response.body, symbolize_keys: true)
       end
 
-      hacker.followed_users = followed_users
+      hacker.followed_users = formatted_hash(followed_users, [
+        :id, :login, :url, :avatar_url, :events_url
+      ])
       hacker.save
+    end
+
+    private_class_method
+    # Gets just the keys we want to persist
+    #
+    # @param obj [Array] the array that needs to be formatted
+    # @param keys [Array] array of keys as symbols
+    def formatted_hash(obj, keys)
+      obj[0].map do |hash|
+        {}.tap do |new_hash|
+          keys.each { |key| new_hash[key] = hash[key] }
+        end
+      end
     end
   end
 end
