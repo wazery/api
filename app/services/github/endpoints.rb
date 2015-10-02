@@ -5,7 +5,6 @@ module Github
       api_base: 'https://api.github.com',
       auth: 'https://github.com/login/oauth/authorize',
       token_exchange: 'https://github.com/login/oauth/access_token',
-      subscriptions: 'https://github.com/users/:username/subscriptions'
     }
 
     # Returns all of the endpoints, for easy listing

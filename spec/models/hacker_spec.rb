@@ -24,13 +24,14 @@ RSpec.describe Hacker do
     it { is_expected.to be_timestamped_document }
 
     # Fields for Github data
-    it { is_expected.to have_fields(:raw_data, :watched_repos, :followed_users).of_type(Hash) }
+    it { is_expected.to have_fields(:raw_data).of_type(Hash) }
+    it { is_expected.to have_fields(:watched_repos, :followed_users).of_type(Array) }
     it { is_expected.to have_fields(:public_gists, :total_private_repos, :owned_private_repos).of_type(Integer) }
 
     it do
       is_expected.to have_fields(
         :company, :name, :api_secret, :avatar_url, :display_name, :current_scope,
-        :private_app_github_access_token, :public_app_github_access_token)
+        :private_github_token)
         .of_type(String)
     end
   end
