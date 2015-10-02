@@ -34,7 +34,6 @@ module Github
           github_uid: github_profile[:id],
           display_name: github_profile[:name],
           company: github_profile[:company],
-          public_app_github_access_token: access_token,
           public_gists: github_profile[:public_gists],
           raw_data: github_profile,
           github_token: access_token,

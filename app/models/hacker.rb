@@ -19,6 +19,7 @@ class Hacker
 
   # Omniauthable
   field :github_token,       type: String, default: ''
+  field :private_github_token, type: String
   field :github_uid, type: String
 
   # Github Data
@@ -33,14 +34,12 @@ class Hacker
   field :total_public_gists, type: Integer
   field :total_private_gists, type: Integer
   field :public_gists, type: Integer
-  field :watched_repos, type: Hash
-  field :followed_users, type: Hash
+  field :watched_repos, type: Array
+  field :followed_users, type: Array
   field :following_url, type: String
   field :current_scope, type: String # '' or 'user, repo'
   field :total_private_repos, type: Integer
   field :owned_private_repos, type: Integer
-  field :private_app_github_access_token, type: String
-  field :public_app_github_access_token, type: String
 
   # Indexes
   index({ email: 1 }, unique: true, background: true)
@@ -58,7 +57,6 @@ class Hacker
 
   # Callbacks
   after_initialize :_set_api_secret
-  after_initialize :_initialize_github_data
 
   # Relations
   has_many :repos
@@ -69,7 +67,9 @@ class Hacker
     # @param data [Hash] the data needed to signup the hacker
     # @return [Hacker] a signed up hacker.
     def sign_up(data)
-      Hacker.create(data)
+      hacker = Hacker.create(data)
+      BasicDataWorker.perform_async(data[:name], data[:github_token])
+      hacker
       # TODO: Implement Intercom Notifier
       # IntercomNotifier.perform_in(1.hours, :signed_up_an_hour_ago, hacker.id)
     end
@@ -81,11 +81,7 @@ class Hacker
     self.api_secret ||= JWTToken.generate
   end
 
-  def _initialize_github_data
-    BasicDataWorker.perform_async(name)
-  end
-
   def private_access_granted?
-    current_hacker.private_app_github_access_token.present?
+    current_hacker.private_github_token.present?
   end
 end
