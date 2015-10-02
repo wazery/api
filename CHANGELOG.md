@@ -1,10 +1,11 @@
-v0.1.2 - Handle failure of fetching Github access token - PR#11 (27 Sep 2015)
+v0.2.0 - GitHub basic data - PR#9 (2 Oct 2015)
 ===
-  - Handle failure of fetching access token - 7a79d74
+  - Remove unnecessary code - b23e77f
+  - Add repo model - 3a2b060
+  - Fetch Github hacker's watched repos and followed hackers - 738909f
+  - Make tests to pass - 838ce0f
 
-v0.1.1 - Fix basic OAuth signup with Github - PR#9 (26 Sep 2015)
-===
-  - Fix basic OAuth signup with Github - 210f06e
+** Islam Wazery **
 
 v0.1.0 - Authentication - PR#8 (25 Sep 2015)
 ===
@@ -32,8 +33,16 @@ v0.1.0 - Authentication - PR#8 (25 Sep 2015)
   - Add more validations to the hacker model - ecaa502
   - Test session creation temporarily	- 82eaff7
   - Remove the devise gem entirly	- 9ea3eb3
-      
+  
 **Islam Wazery**
+
+## v0.1.2 - Handle failure of fetching Github access token - PR#11 (27 Sep 2015)
+
+  - Handle failure of fetching access token - 7a79d74
+
+## v0.1.1 - Fix basic OAuth signup with Github - PR#9 (26 Sep 2015)
+
+  - Fix basic OAuth signup with Github - 210f06e
 
 v0.0.0
 ===
