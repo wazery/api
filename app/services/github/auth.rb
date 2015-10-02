@@ -30,10 +30,9 @@ module Github
         hacker = Hacker.sign_up(
           email: github_profile[:email],
           avatar_url: github_profile[:avatar_url],
-          username: github_profile[:login],
+          name: github_profile[:login],
           github_uid: github_profile[:id],
           display_name: github_profile[:name],
-          name: github_profile[:name],
           company: github_profile[:company],
           public_app_github_access_token: access_token,
           public_gists: github_profile[:public_gists],

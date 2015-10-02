@@ -22,16 +22,19 @@ RSpec.describe Hacker do
     it { is_expected.to have_fields(:name, :github_token, :email, :current_sign_in_ip, :last_sign_in_ip) }
     it { is_expected.to have_fields(:remember_created_at, :current_sign_in_at, :last_sign_in_at).of_type(Time) }
     it { is_expected.to be_timestamped_document }
+
     # Fields for Github data
-    it { is_expected.to have_fields(:raw_data) }
-    it { is_expected.to have_fields(:public_gists, :private_gists, :total_private_repos, :owned_private_repos).of_type(Integer) }
+    it { is_expected.to have_fields(:raw_data, :watched_repos, :followed_users).of_type(Hash) }
+    it { is_expected.to have_fields(:public_gists, :total_private_repos, :owned_private_repos).of_type(Integer) }
+
     it do
       is_expected.to have_fields(
-        :company, :username, :api_secret, :avatar_url, :display_name, :current_scope,
+        :company, :name, :api_secret, :avatar_url, :display_name, :current_scope,
         :private_app_github_access_token, :public_app_github_access_token)
         .of_type(String)
     end
   end
+
   # describe 'signup' do
   #   let(:hacker) { FactoryGirl.build :hacker }
   #   WebMock.stub_request(:any, 'www.example.com')
