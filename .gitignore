@@ -50,3 +50,8 @@ config/mongoid.yml
 
 # Ignore all coverage reports
 coverage
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
