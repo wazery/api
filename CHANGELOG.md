@@ -5,7 +5,7 @@ v0.2.0 - GitHub basic data - PR#9 (2 Oct 2015)
   - Fetch Github hacker's watched repos and followed hackers - 738909f
   - Make tests to pass - 838ce0f
 
-** Islam Wazery **
+**[Islam Wazery](https://github.com/wazery)**
 
 v0.1.0 - Authentication - PR#8 (25 Sep 2015)
 ===
@@ -34,7 +34,7 @@ v0.1.0 - Authentication - PR#8 (25 Sep 2015)
   - Test session creation temporarily	- 82eaff7
   - Remove the devise gem entirly	- 9ea3eb3
   
-**Islam Wazery**
+**[Islam Wazery](https://github.com/wazery)**
 
 ## v0.1.2 - Handle failure of fetching Github access token - PR#11 (27 Sep 2015)
 
