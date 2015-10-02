@@ -5,6 +5,10 @@ v0.2.0 - GitHub basic data - PR#9 (2 Oct 2015)
   - Fetch Github hacker's watched repos and followed hackers - 738909f
   - Make tests to pass - 838ce0f
 
+## v0.2.1 - Fix Watched repos and followed users data fetching PR#15 (2 Oct 2015)
+
+  - Fix watched repos and followed users data fetching - 031f8ce
+
 **[Islam Wazery](https://github.com/wazery)**
 
 v0.1.0 - Authentication - PR#8 (25 Sep 2015)
