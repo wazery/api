@@ -41,7 +41,7 @@ module Github
     def fetch_followed_users(name, github_token)
       hacker = Hacker.where(name: name, github_token: github_token).first
 
-      conn = Faraday.new(url: hacker.raw_data[:following_url].gsub(%{/(\{\/other_user\})/}, ''))
+      conn = Faraday.new(url: hacker.raw_data[:following_url].gsub(%r{/(\{\/other_user\})/}, ''))
       followed_users = []
 
       10_000.times.each do |page|
