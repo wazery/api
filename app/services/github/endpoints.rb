@@ -5,6 +5,7 @@ module Github
       api_base: 'https://api.github.com',
       auth: 'https://github.com/login/oauth/authorize',
       token_exchange: 'https://github.com/login/oauth/access_token',
+      user_events: 'https://api.github.com/users/:username/received_events'
     }
 
     # Returns all of the endpoints, for easy listing
