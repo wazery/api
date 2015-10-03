@@ -24,13 +24,16 @@ gem 'jwt'
 gem 'bson_ext'
 gem 'multi_json'
 
+# Stream processing
+gem 'polling'
+gem 'actioncable', github: 'rails/actioncable'
+# Use Puma as the app server, for Rails, and Cable servers
+gem 'puma'
+
 # Slack integration for Capistrano
 gem 'slackistrano', require: false
 
 gem 'active_model_serializers'
-
-# Use unicorn as the app server
-gem 'unicorn', group: :production
 
 gem 'rubocop', require: false, group: [:development, :test]
 
